@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>the Employee Calculator Page</title>
+        <link rel="stylesheet" th:href="@{/bootstrap.css}"/>
+        <link rel="stylesheet" th:href="@{/style.css}"/>
+        <script type="text/javascript" th:src="@{/jquery.js}"></script>
+        <script type="text/javascript" th:src="@{/client.js}"></script>
+    </head>
+    <body>
+        <div class="container ">
+            <h1>This is the HR Employee Database Page</h1>
+            <h2>Employee Search</h2>
+            <div class="row divStyle1">
+                <div class="divStyle2">
+                    <form>
+                        <input type="text" id="empIDSearch" placeholder="Enter ID to Search"/>
+                        <button id="btnIDSearch">Search</button>
+                    </form>
+                    <p>Search for a Employee by ID</p>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="divStyle2">
+                    <form>
+                        <select name="Position" size="0" id="empPosSearch">
+                            <option value="">Choose Position...</option>
+                            <option value="buyer">Buyer</option>
+                            <option value="cashier">Cashier</option>
+                            <option value="marketing">Marketing</option>
+                            <option value="sales">Sales</option>
+                            <option value="stocker">Stocker</option>
+                        </select>
+                        <button id="btnPosSearch">Search</button>
+                    </form>
+                    <p>Search for Employees by Position</p>
+                </div>
+                <div class="col-md-1"></div>
+                <div id="foundStudent" class="divStyle2">Search Results Here</div>
+            </div>
+            <h2>Add New Employee</h2>
+            <div class="row divStyle1">
+                <form>
+                    <input type="number" id="idEntry" placeholder="Enter ID#"/>
+                    <input type="text" id="fNameEntry" placeholder="Enter First Name"/>
+                    <input type="text" id="lNameEntry" placeholder="Enter Last Name"/>
+                    <input type="number" id="salaryEntry" placeholder="Enter Salary"/>
+                    <select name="Position" size="0" id="posEntry">
+                        <option value="">Choose Position...</option>
+                        <option value="buyer">Buyer</option>
+                        <option value="cashier">Cashier</option>
+                        <option value="marketing">Marketing</option>
+                        <option value="sales">Sales</option>
+                        <option value="stocker">Stocker</option>
+                    </select>
+                    <button id="btnAddEmp">Add Employee</button>
+                </form>
+            </div>
+            <h2>Salary Calculations</h2>
+            <div class="row divStyle1" id="dispSal"></div>
+            <h2>Current Employee Roster</h2>
+            <div class="row divStyle1">
+                <div id="dispAllEmp"></div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -30,16 +31,21 @@ public class AppController {
         employeeDB.addEmployee((newEmployee));
         return newEmployee;
     }
-    @RequestMapping("/find/{empId}")
-    public @ResponseBody Employee findEmpByID (@PathVariable String userInput){
-        Employee foundEmployee=employeeDB.findEmpByID(userInput);
+    @RequestMapping("/findById{empId}")
+    public @ResponseBody Employee findEmpByID (@PathVariable String empId){
+        Employee foundEmployee=employeeDB.findEmpByID(empId);
         return foundEmployee;
     }
-    @RequestMapping("/find/{empPos}")
-    public @ResponseBody Employee findEmpByPos (@PathVariable String userInput){
-        Employee foundEmployee=employeeDB.findEmpByPos(userInput);
-        return foundEmployee;
+    @RequestMapping("/findByPos/{empPos}")
+    public @ResponseBody List<Employee> findStudentById(@PathVariable String empPos){
+        System.out.println("Find: " + empPos);
+        Employee foundEmployee=employeeDB.findEmpByPos(empPos);
+        List<Employee> foundArray=new ArrayList<>();
+        foundArray.add(foundEmployee);
+        System.out.println("foundArray: "+foundArray);
+        return foundArray;
     }
+
     @RequestMapping("/")
     public String indexRte (){
         return "index";

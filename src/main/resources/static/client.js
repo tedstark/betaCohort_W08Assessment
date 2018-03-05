@@ -7,8 +7,8 @@ function init() {
 }
 function enableButtons() {
     $("#btnAddEmp").on("click",addEmployee);
-    // $("#btnIDSearch").on("click",findEmpById);
-    // $("#btnPosSearch").on("click",findEmpByPos);
+    $("#btnIDSearch").on("click",findEmpById);
+    $("#btnPosSearch").on("click",findEmpByPos);
 }
 function addEmployee() {
     event.preventDefault();
@@ -57,3 +57,56 @@ function appendRoster(roster) {
             employee.empSalary+"</p>");
     }
 }
+function findEmpById() {
+    event.preventDefault();
+    if (($("#empIDSearch").val()) == "") {
+        $("#dispResults").text("Enter an Employee ID to Search!");
+    } else {
+        var empID = $("#empIDSearch").val();
+        $.ajax({
+            type: "GET",
+            url: "/findById/"+empID,
+            success: function(fndEmployee){
+                dispEmpById(fndEmployee);
+            }
+        })
+    }
+
+}
+function dispEmpById(employee) {
+    $("#dispResults").empty();
+    $("#dispResults").append("<div></div>");
+    var el = $("#dispResults").children().last();
+    el.append("<p>" + employee.empId+" - "+
+        employee.empFName+" "+
+        employee.empLName+" "+
+        employee.empPos+" "+
+        employee.empSalary+"</p>");
+}
+function findEmpByPos() {
+    event.preventDefault();
+    if (($("#empPosSearch").val()) == "") {
+        $("#dispResults").text("Choose an Employee Position to Search!");
+    } else {
+        var empPos = $("#empPosSearch").val();
+        console.log("Find all "+empPos)
+        $.ajax({
+            type: "GET",
+            url: "/findByPos/"+empPos,
+            success: function(fndEmployees){
+                console.log("Found em!");
+                dispEmpByPos(fndEmployees);
+            }
+        });
+    }
+}
+function dispEmpByPos(employees) {
+    $("#dispResults").empty();
+    $("#dispResults").append("<div></div>");
+    var el = $("#dispResults").children().last();
+    el.append("<p>" + employees.empId+" - "+
+        employees.empFName+" "+
+        employees.empLName+" "+
+        employees.empPos+" "+
+        employees.empSalary+"</p>");
+    }
